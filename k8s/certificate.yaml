@@ -8,6 +8,6 @@ spec:
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: mtchow-myftp-biz
+  commonName: mtchow.myftp.biz
   dnsNames:
     - mtchow.myftp.biz
