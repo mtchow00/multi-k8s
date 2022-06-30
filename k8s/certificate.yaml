@@ -10,4 +10,4 @@ spec:
     kind: ClusterIssuer
   commonName: mtchow-myftp-biz
   dnsNames:
-    - mtchow-myftp-biz
+    - mtchow.myftp.biz
