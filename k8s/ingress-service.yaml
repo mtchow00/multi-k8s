@@ -12,8 +12,13 @@ metadata:
     cert-manager.io/cluster-issuer: 'letsencrypt-prod'
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
+  tls:
+    - hosts:
+        -mtchow.myftp.biz
+      secretName: mtchow-myftp-biz
   rules:
-    - http:
+    - host: mtchow.myftp.biz
+      http:
         paths:
           - path: /?(.*)
             # UPDATE PATH
