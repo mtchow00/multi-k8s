@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+ 
+kind: Certificate
+metadata:
+  name: mtchow-myftp-biz-tls
+spec:
+  secretName: mtchow-myftp-biz
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: mtchow-myftp-biz
+  dnsNames:
+    - mtchow-myftp-biz
