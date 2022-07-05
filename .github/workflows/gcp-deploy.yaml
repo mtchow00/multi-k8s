@@ -1,0 +1,42 @@
+name: Deploy MultiK8s
+on:
+  # push:
+  #   branches:
+  #     - main
+  [workflow_dispatch]
+ 
+env:
+  SHA: $(git rev-parse HEAD)
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+ 
+      - name: Set Service Key
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+ 
+      - name: Set Project
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: multi-k8s-354621
+ 
+      - name: Auth
+        run: |-
+          gcloud --quiet auth configure-docker
+ 
+      - name: Get Credentials
+        uses: google-github-actions/get-gke-credentials@v0
+        with:
+          cluster_name: multi-cluster
+          location: asia-east1-a
+ 
+      - name: Apply
+        run: |-
+          kubectl apply -f k8s
+          # kubectl set image deployments/server-deployment server=javaer/multi-server-k8s-pgfix-gh:${{ env.SHA }}
+          # kubectl set image deployments/client-deployment client=javaer/multi-client-k8s-gh:${{ env.SHA }}
+          # kubectl set image deployments/worker-deployment worker=javaer/multi-worker-k8s-gh:${{ env.SHA }}
