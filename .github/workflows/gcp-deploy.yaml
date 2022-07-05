@@ -1,4 +1,4 @@
-name: Deploy MultiK8s
+name: Only Deploy MultiK8s to GCP
 on:
   # push:
   #   branches:
